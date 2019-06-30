@@ -1,0 +1,324 @@
+/* Import de la police d'écriture */
+@font-face {
+    font-family: 'Brandon';
+    src: url('Brandon.ttf');
+}
+
+/* Effet de transition de page */
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-in {
+    -webkit-animation: fadeIn .5s ease-in;
+    animation: fadeIn .5s ease-in;
+}
+
+.animate-out {
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+    opacity: 0;
+}
+
+/* Paramètre d'affichage du html et du body */
+html,
+body {
+    background-color: #fafafa;
+    width: 100%;
+    height: 100%;
+    font-family: 'Brandon';
+}
+
+html {
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+/* Effet de transparence sur les colonnes */
+[class^=col] {
+    margin-top: 1em;
+    background: rgba(255, 255, 255, 0.8);
+    padding: .25em 1em;
+    border-radius: 15px;
+}
+
+/* Paramètre de la div Canvas (plan pour l'effet neige d'arrière plan)*/
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    min-height: 100%;
+    -webkit-contain: strict;
+    -moz-contain: strict;
+    -ms-contain: strict;
+    -o-contain: strict;
+    contain: strict;
+}
+
+/* Définition de la profondeur entre le contenu et le background */
+.container {
+    z-index: 10;
+}
+
+.background {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+}
+
+/* CSS du bloc d'entête */
+.entete {
+    display: block;
+    text-align: center;
+}
+
+/* CSS des titres */
+.title {
+    font-size: 40pt;
+    color: rgb(18, 95, 105);
+    text-align: center;
+}
+
+.intro {
+    text-align: center;
+    font-size: 16pt
+
+}
+
+h1 {
+    line-height: 1.5
+}
+
+h2 {
+    margin-top: .5em;
+}
+
+h3 {
+    margin-bottom: .5em;
+}
+
+/* Changement de la position d'éléments lorsque en fonction de la taille de la fenêtre */
+@media screen and (min-width: 50em) {
+    #photoIdentite {
+        display: inline-block;
+        width: 200px;
+        float: left;
+    }
+
+    #name {
+        font-size: 50pt;
+        color: rgb(18, 95, 105);
+        display: block;
+        transform: translateY(50%);
+    }
+
+    #informations {
+        text-align: left;
+        display: inline-block;
+        font-size: 15pt;
+        color: rgb(18, 95, 105);
+        transform: translateY(50%);
+    }
+}
+
+@media screen and (max-width: 50em) {
+    #photoIdentite {
+        display: inline-block;
+        width: 200px;
+    }
+
+    #name {
+        font-size: 50pt;
+        color: rgb(18, 95, 105);
+        display: block;
+    }
+
+    #informations {
+        text-align: left;
+        display: inline-block;
+        font-size: 15pt;
+        color: rgb(18, 95, 105);
+    }
+}
+
+
+/* CSS de la timeline */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.timeline {
+    width: 100%;
+    padding: 50px 0;
+    margin: 50px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -1px;
+    width: 2px;
+    height: 100%;
+    background: rgb(18, 95, 105);
+    z-index: 1
+}
+
+.timeline-block {
+    width: -webkit-calc(50% + 8px);
+    width: -moz-calc(50% + 8px);
+    width: calc(50% + 8px);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    justify-content: space-between;
+    clear: both;
+
+}
+
+.timeline-block-right {
+    float: right;
+}
+
+.timeline-block-left {
+    float: left;
+    direction: rtl
+}
+
+.marker {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgb(18, 95, 105);
+    background: rgb(255, 255, 255);
+    margin-top: 19px;
+    z-index: 9999
+}
+
+.timeline-content {
+    width: 100%;
+    padding: 0 15px;
+    color: rgb(18, 95, 105);
+}
+
+.timeline-content a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.timeline-content span {
+    font-size: 20px;
+    color: #141414;
+}
+
+.timeline-content p {
+    font-size: 18px;
+    line-height: 1.5em;
+    word-spacing: 1px;
+    color: #606060;
+}
+
+@media screen and (max-width: 50em) {
+    .timeline:before {
+        left: 8px;
+        width: 2px;
+    }
+
+    .timeline-block {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .timeline-block-right {
+        float: none;
+    }
+
+    .timeline-block-left {
+        float: none;
+        direction: ltr;
+    }
+}
+
+/* CSS des compétences */
+.tableauComp {
+    margin: auto;
+    max-width: 40em;
+}
+
+.progress {
+    margin-bottom: 2em;
+}
+
+.progress-bar {
+    background-color: rgb(18, 95, 105);
+    height: .75em;
+}
+
+.competences {
+    margin: 50px auto;
+}
+
+.competences h3 {
+    margin-bottom: .1em;
+    color: #606060;
+}
+
+/* CSS formulaire de contact */
+.formContact {
+    margin: 50px auto;
+    line-height: 2.5em;
+}
+
+.inputContact {
+    margin-bottom: .5em;
+}
+
+/* CSS fiche admin */
+.fiche{
+    display: inline-block;
+    background: #f1f1f1;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+/* CSS des Projets */
+.card{
+    margin: 50px auto;
+}
